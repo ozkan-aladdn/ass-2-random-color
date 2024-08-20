@@ -14,28 +14,28 @@ const randomColor = () => {
   return `rgb(${red}, ${green}, ${blue})`;
 };
 
-btnClick.addEventListener("click", () => {
-  const rastgele = randomColor();
-  body.style.backgroundColor = rastgele;
-  colorText.textContent = `${rastgele}`;
-  
+function repeat() {
+  const newColor = randomColor();
+  body.style.backgroundColor = newColor;
+  colorText.textContent = newColor;
+  color.value = newColor;
+}
+btnClick.addEventListener("click", () => repeat());
+
+btnOver.addEventListener("mouseover", () => repeat());
+
+color.addEventListener("input", () => {
+  body.style.backgroundColor = color.value;
+  colorText.textContent = color.value;
 });
 
-btnOver.addEventListener("mouseover", () => {
-  const rastgele = randomColor();
-  body.style.backgroundColor = rastgele;
-  colorText.textContent = `${rastgele}`;
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    repeat();
+  }
 });
 
-color.addEventListener("input",()=>{
-    body.style.backgroundColor = color.value;
-    colorText.textContent = `${rastgele}`;
-    
-})
-
-copy.addEventListener("click", ()=>{
-    alert("Renk kodu başarıyla kopyalandı!")
-    navigator.clipboard.writeText(colorText.textContent);
-})
-
-
+copy.addEventListener("click", () => {
+  alert("Renk kodu başarıyla kopyalandı!");
+  navigator.clipboard.writeText(colorText.textContent);
+});
